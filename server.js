@@ -75,7 +75,7 @@ app.get('/query', async (req, res) => {
 		]})
 		.sort({timestamp:-1})
 		.limit(10)
-		.toArray()
+		.toArray() 
 		.then((results) => res.send(results)).catch((e) => {console.log(e)})
 	} else {
 		res.send([{content: "Empty search", userID: "error"}]).catch((e) => {console.log(e)});
