@@ -1,0 +1,153 @@
+body {
+  background-color: #3b4558;
+  color: white;
+}
+
+.App {
+  text-align: center;
+}
+
+.header {
+  padding-left: 20px;
+  text-align: left;
+  background-color: #2c3547;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.navMenu {
+  list-style-type: none;
+  margin: 0px;
+  padding: 5px;
+  position:fixed;
+  top:0;
+  left: 0%;
+  width:100%;
+  z-index:100;
+  background-color: #2c3547;
+  filter: drop-shadow(-1px 1px 10px #000);
+}
+
+.menuLink {
+  display: inline;
+  float: left;
+  margin-right: 5px;
+  margin-top: 2px;
+  display: block;
+  padding: 8px;
+  color: rgb(206, 211, 221);
+  text-decoration: none;
+  font-size: 26px;
+}
+
+.menuLink:hover {
+  background-color: #3b4558;
+  border-radius: 10px;
+}
+
+.post {
+  background-color: #2c3547;
+  margin: auto;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  width: 500px;
+  padding: 20px;
+  border-radius: 20px;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  max-height: 1028px;
+}
+
+.about {
+  margin-top: 100px;
+}
+
+.upload {
+  margin-top: 100px;
+}
+
+.Feed {
+  padding: 10px;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.PageBody {
+  padding: 10px;
+  margin-top: 0px;
+  text-align: center;
+  background-color: #3b4558;
+}
+
+.postBody {
+  margin: 20px;
+  border: none;
+  border-radius: 5px;
+  resize: none;
+  background-color: #2c3547;
+  color: white;
+  padding: 5px;
+}
+
+.postUser {
+  border: none;
+  border-radius: 5px;
+  resize: none;
+  background-color: #2c3547;
+  color: white;
+  padding: 5px;
+  width: 200px;
+}
+
+.postSubmit {
+  border: none;
+  border-radius: 5px;
+  resize: none;
+  background-color: #2c3547;
+  color: white;
+  padding: 5px;
+  width: 200px;
+}
+
+.postSubmit:hover {
+  background-color: #1b222e;
+}
+
+.search {
+  margin-top: 10px;
+  background-color: #3b4558;
+  border: none;
+  color: white;
+  height: 30px;
+  padding: 5px;
+  font-size: 18px;
+  float: right;
+  margin: 5px;
+  margin-right: 20px;
+  border-radius: 5px;
+  width: 20%;
+}
+
+.searchButton {
+  background-color: #3b4558;
+  float: right;
+  background-color: #3b4558;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  width: 80px;
+  height: 40px;
+  font-size: 18px;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.searchButton:hover {
+  background-color: #1b222e;
+}
+
+a {
+  color: rgb(206, 211, 221);
+}
