@@ -55,7 +55,15 @@ app.post('/post', async (req, res) => {
 app.get('/posts', async (req, res) => {
 	console.log("Posts requested")
 	await posts.find({}).sort({timestamp:-1}).limit(10).toArray().then((results) => res.send(results))
-}) 
+})
+
+app.get(["/search", "/post", "/about"], function (req, res) {
+	res.sendFile(path.join(__dirname, "app/build/index.html"), function (err) {
+	  if (err) {
+		res.status(500).send(err);
+	  }
+	});
+  });
 
 app.get('/query', async (req, res) => {
 	query = decodeURIComponent(req.query.query)
