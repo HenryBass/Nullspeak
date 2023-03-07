@@ -58,6 +58,7 @@ app.get('/posts', async (req, res) => {
 })
 
 app.get(["/search", "/post", "/about"], function (req, res) {
+	console.log("Page requested")
 	res.sendFile(path.join(__dirname, "app/build/index.html"), function (err) {
 	  if (err) {
 		res.status(500).send(err);
