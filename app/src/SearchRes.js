@@ -9,7 +9,7 @@ function SearchRes() {
 
   useEffect(() => {
     console.log(window.location.search.slice(1))
-    axios.get("https://social-backend-2ck7.onrender.com/query?" + new URLSearchParams({
+    axios.get("https://null.cyclic.app/query?" + new URLSearchParams({
       query: window.location.search.slice(1)
     }))
     .then((response) => {
