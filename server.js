@@ -9,14 +9,12 @@ require('dotenv').config();
 const mongoURI = process.env.MONGODBURI;
 const salt = process.env.SALT;
  
-console.log(mongoURI + salt)
-
 const client = new MongoClient(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 const posts = client.db("Data").collection("Posts")
 const cors = require('cors')
 
 const app = express()
-const port = 3001
+const port = 3000
 
 const reqLimiter = rateLimit({
 	windowMs: 15 * 60 * 1000,
@@ -34,10 +32,9 @@ const postLimiter = rateLimit({
 
 app.use(express.json());
 app.use(cors());
-
+app.use(express.static("app/build"));
 app.use("/posts", reqLimiter)
 app.use("/search", reqLimiter)
-
 app.use("/post", postLimiter)
   
 app.post('/post', async (req, res) => {
@@ -57,10 +54,10 @@ app.post('/post', async (req, res) => {
 
 app.get('/posts', async (req, res) => {
 	console.log("Posts requested")
-	await posts.find({}).sort({timestamp:-1}).limit(10).toArray().then((results) => res.send(results)).catch((e) => {console.log(e)})
+	await posts.find({}).sort({timestamp:-1}).limit(10).toArray().then((results) => res.send(results))
 }) 
 
-app.get('/search', async (req, res) => {
+app.get('/query', async (req, res) => {
 	query = decodeURIComponent(req.query.query)
 	console.log("Posts searched: " + query)
 	if (req.query.query != "") {

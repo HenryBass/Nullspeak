@@ -2,7 +2,8 @@ import './App.css';
 import { Link } from 'react-router-dom';
 
 function handleClick() {
-  window.location.href = "/search?" + encodeURIComponent(document.getElementById("searchBox").value);
+  window.location.href = "/search?" + encodeURIComponent(document.getElementById("searchBox").value)
+  //this.props.router.push('/search');
 }
 
 function Menu() {
