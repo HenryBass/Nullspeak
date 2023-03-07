@@ -7,7 +7,7 @@ function Feed() {
 
     const form = e.target;
     const formData = new FormData(form);
-    fetch('https://server-mgg4.onrender.com/post', { method: "post", headers: {'Content-Type': 'application/json'}, mode: 'cors', body: JSON.stringify({'userID': formData.get("userID"), 'content': formData.get("content")})}).then(() => {window.location.href = '/'});
+    fetch('https://social-backend-2ck7.onrender.com/post', { method: "post", headers: {'Content-Type': 'application/json'}, mode: 'cors', body: JSON.stringify({'userID': formData.get("userID"), 'content': formData.get("content")})}).then(() => {window.location.href = '/'});
   }
 
   return (

@@ -8,7 +8,7 @@ function Feed() {
   let [posts, setPosts] = useState([{userID: "Loading", content: "Loading"}]);
 
   useEffect(() => {
-    axios.get("https://server-mgg4.onrender.com/posts").then((response) => {
+    axios.get("https://social-backend-2ck7.onrender.com/posts").then((response) => {
       setPosts(response.data);
     });
   }, []);
