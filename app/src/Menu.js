@@ -11,7 +11,7 @@ function Menu() {
     <div className="App">
       <header className = "header">
         <ul className = 'navMenu'>
-          <li><Link to="/" className='menuLink'>Henrybook 4.0</Link></li>
+          <li><Link to="/" className='menuLink'><b>nullspeak</b></Link></li>
           <li><Link to="/post" className = 'menuLink'>Post</Link></li>
           <li><Link to="/about" className = 'menuLink'>FAQ</Link></li>
           <li><input placeholder='Query' className='search' id='searchBox'></input></li>
