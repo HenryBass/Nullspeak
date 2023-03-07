@@ -18,10 +18,10 @@ function SearchRes() {
   }, []);
 
   return (
-    <>
+    <div className="Feed">
       {posts.map(post => <Post postContent = {post}/>)}
       <p>Only the most recent posts are visible!</p>
-    </>
+    </div>
   );
 }
 
