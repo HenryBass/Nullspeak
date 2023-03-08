@@ -2,7 +2,8 @@ const { json } = require('express');
 const express = require('express')
 const rateLimit = require('express-rate-limit')
 const MongoClient = require('mongodb').MongoClient;
-var crypto = require('crypto');
+const ObjectId = require('mongodb').ObjectId; 
+const crypto = require('crypto');
 const path = require("path");
 require('dotenv').config();
 
@@ -86,14 +87,16 @@ app.get('/query', async (req, res) => {
 app.get('/getComments', async (req, res) => {
 	query = decodeURIComponent(req.query.query)
 	console.log("comments Requested: " + query)
+	
 	if (req.query.query != "") {
-		await posts.find( {$or:[
-			{"_id": ObjectId(query)}
-		]})
+		let id = ObjectId(query)
+
+		await posts.find({_id:id}).toArray().then(
+		posts.find({"replyTo": query})
 		.sort({timestamp:-1})
 		.limit(10)
-		.toArray() 
-		.then((results) => res.send(results)).catch((e) => {console.log(e)})
+		.toArray())
+		.then((results, post) => res.send(post.concat(results))).catch((e) => {console.log(e)})
 	} else {
 		res.send([{content: "Empty search", userID: "error", timestamp: Date.now}]).catch((e) => {console.log(e)});
 	}
