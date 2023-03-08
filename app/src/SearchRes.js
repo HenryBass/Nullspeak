@@ -5,7 +5,7 @@ import Post from './Post.js'
 
 function SearchRes() {
   
-  let [posts, setPosts] = useState([{userID: "Loading", content: "Loading"}]);
+  let [posts, setPosts] = useState([{userID: "Loading", content: "Loading", timestamp: Date.now()}]);
 
   useEffect(() => {
     console.log(window.location.search.slice(1))
