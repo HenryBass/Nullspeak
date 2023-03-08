@@ -57,7 +57,7 @@ app.get('/posts', async (req, res) => {
 	await posts.find({}).sort({timestamp:-1}).limit(10).toArray().then((results) => res.send(results))
 })
 
-app.get(["/search", "/post", "/about"], function (req, res) {
+app.get(["/search", "/post", "/about", "/comments"], function (req, res) {
 	console.log("Page requested")
 	res.sendFile(path.join(__dirname, "app/build/index.html"), function (err) {
 	  if (err) {
@@ -79,7 +79,23 @@ app.get('/query', async (req, res) => {
 		.toArray() 
 		.then((results) => res.send(results)).catch((e) => {console.log(e)})
 	} else {
-		res.send([{content: "Empty search", userID: "error"}]).catch((e) => {console.log(e)});
+		res.send([{content: "Empty search", userID: "error", timestamp: Date.now}]).catch((e) => {console.log(e)});
+	}
+}) 
+
+app.get('/getComments', async (req, res) => {
+	query = decodeURIComponent(req.query.query)
+	console.log("Posts searched: " + query)
+	if (req.query.query != "") {
+		await posts.find( {$or:[
+			{"_id": {$regex: query}}
+		]})
+		.sort({timestamp:-1})
+		.limit(10)
+		.toArray() 
+		.then((results) => res.send(results)).catch((e) => {console.log(e)})
+	} else {
+		res.send([{content: "Empty search", userID: "error", timestamp: Date.now}]).catch((e) => {console.log(e)});
 	}
 }) 
 
