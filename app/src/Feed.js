@@ -5,7 +5,7 @@ import Post from './Post.js'
 
 function Feed() {
   
-  let [posts, setPosts] = useState([{userID: "Loading", content: "Loading"}]);
+  let [posts, setPosts] = useState([{userID: "Loading", content: "Loading", timestamp: 1}]);
 
   useEffect(() => {
     axios.get(" https://null.cyclic.app/posts").then((response) => {
