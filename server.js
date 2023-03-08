@@ -85,10 +85,10 @@ app.get('/query', async (req, res) => {
 
 app.get('/getComments', async (req, res) => {
 	query = decodeURIComponent(req.query.query)
-	console.log("Posts searched: " + query)
+	console.log("comments Requested: " + query)
 	if (req.query.query != "") {
 		await posts.find( {$or:[
-			{"_id": {$regex: query}}
+			{"_id": ObjectId(query)}
 		]})
 		.sort({timestamp:-1})
 		.limit(10)
