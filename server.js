@@ -89,7 +89,7 @@ app.get('/getComments', async (req, res) => {
 	console.log("comments Requested: " + query)
 	
 	if (req.query.query != "") {
-		let id = ObjectId(query)
+		let id = new ObjectId(query)
 
 		await posts.find({_id:id}).toArray().then(
 		posts.find({"replyTo": query})
