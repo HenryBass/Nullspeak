@@ -6,8 +6,10 @@ function Post({postContent}) {
 
   function getAgo(time) {
     let date = new Date(Date.now() - postContent.timestamp)
-    if (Math.floor(date / 1000 / 60 / 60) < 24) {
-      return Math.floor(date / 1000 / 60 / 60) + " hours ago";
+    if ((date / 1000 / 60) <= 60) {
+      return Math.floor(date / 1000 / 60) + " minute" + (Math.floor(date / 1000 / 60) == 1 ? "" : "s") + " ago";
+    } else if (Math.floor(date / 1000 / 60 / 60) < 24) {
+      return Math.floor(date / 1000 / 60 / 60) + " hour" + (Math.floor(date / 1000 / 60 / 60) > 1 ? "s" : "") + " ago";
     } else {
       return Math.floor(date / 1000 / 60 / 60 / 24) + " days ago";
     }

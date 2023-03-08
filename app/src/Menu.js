@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 function handleClick() {
   window.location.href = "/search?" + encodeURIComponent(document.getElementById("searchBox").value)
-  //this.props.router.push('/search');
 }
 
 function Menu() {
@@ -14,7 +13,7 @@ function Menu() {
           <li><Link to="/" className='menuLink'><b>nullspeak</b></Link></li>
           <li><Link to="/post" className = 'menuLink'>Post</Link></li>
           <li><Link to="/about" className = 'menuLink'>FAQ</Link></li>
-          <li><input placeholder='Query' className='search' id='searchBox'></input></li>
+          <li><input placeholder='Query' className='search' id='searchBox' onkeydown = "if (event.keyCode == 13) {document.getElementById('btnSearch').click()}"></input></li>
           <li><button className='searchButton' onClick={handleClick}>Search</button></li>
         </ul> 
       </header>
