@@ -156,5 +156,18 @@ a {
   font-size: 14px;
   margin: none;
   padding: none;
-  color:rgb(206, 211, 221)
+  color:rgb(206, 211, 221);
+}
+
+.repliesButton {
+  background-color: #3b4558;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  float: left;
+  font-size: 16px;
+}
+
+.repliesButton:hover {
+  background-color: #1b222e;
 }

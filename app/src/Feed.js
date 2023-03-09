@@ -5,10 +5,10 @@ import Post from './Post.js'
 
 function Feed() {
   
-  let [posts, setPosts] = useState([{userID: "Loading", content: "Loading", timestamp: 1}]);
+  let [posts, setPosts] = useState([{userID: "Loading", content: "Loading", timestamp: Date.now()}]);
 
   useEffect(() => {
-    axios.get(" https://null.cyclic.app/posts").then((response) => {
+    axios.get(" http://localhost:3000/posts").then((response) => {
       setPosts(response.data);
     });
   }, []);

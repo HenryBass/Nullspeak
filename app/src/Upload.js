@@ -7,7 +7,7 @@ function Feed() {
 
     const form = e.target;
     const formData = new FormData(form);
-    fetch(' https://null.cyclic.app/post', { method: "post", headers: {'Content-Type': 'application/json'}, mode: 'cors', body: JSON.stringify({'userID': formData.get("userID"), 'content': formData.get("content")})}).then(() => {window.location.href = '/'});
+    fetch(' http://localhost:3000/post', { method: "post", headers: {'Content-Type': 'application/json'}, mode: 'cors', body: JSON.stringify({'userID': formData.get("userID"), 'content': formData.get("content")})}).then(() => {window.location.href = '/'});
   }
 
   return (

@@ -31,22 +31,39 @@ const postLimiter = rateLimit({
 	legacyHeaders: false,
 })
 
+
 app.use(express.json());
 app.use(cors());
 app.use(express.static("app/build"));
+
 app.use("/posts", reqLimiter)
 app.use("/search", reqLimiter)
+app.use("/comments", reqLimiter)
+app.use("/findById", reqLimiter)
+
 app.use("/post", postLimiter)
-  
+
 app.post('/post', async (req, res) => {
 	console.log(req.body)
-	if(req.body.userID != undefined && req.body.content != undefined) {
+	if(req.body.userID != undefined && req.body.content != undefined && req.body.replyTo != undefined) {
 		let hash = crypto.createHash('md5').update(req.body.userID + salt).digest('hex').toString()
 		console.log(hash)
-		await posts.insertOne({userID: hash, content:req.body.content.substr(0, 256), timestamp:Date.now()})
-		.then(() => {res.status(200).send("Posted under userID:" + hash)})
+		await posts.insertOne({userID: hash,
+			content:req.body.content.substr(0, 256),
+			timestamp:Date.now(),
+			replyTo:req.body.replyTo,
+			replyCount:0})
+		.then(() => {
+			if (req.body.replyTo !== "") {
+				console.log("Incrementing replies: " + req.body.replyTo)
+				let id = new ObjectId(req.body.replyTo)
+				posts.updateOne({_id: id}, {$inc : {replyCount : 1}})
+			} else {
+			}
+			res.status(200).send("Posted under userID:" + hash)
+		})
 		.catch((e) => {console.log(e)});
-		
+
 	} else {
 		res.status(400).send("Failed request")
 	}
@@ -55,7 +72,7 @@ app.post('/post', async (req, res) => {
 
 app.get('/posts', async (req, res) => {
 	console.log("Posts requested")
-	await posts.find({}).sort({timestamp:-1}).limit(10).toArray().then((results) => res.send(results))
+	await posts.find({ $or: [ { replyTo: { $exists: false } }, { replyTo: "" } ] }).sort({timestamp:-1}).limit(10).toArray().then((results) => res.send(results))
 })
 
 app.get(["/search", "/post", "/about", "/comments"], function (req, res) {
@@ -89,14 +106,33 @@ app.get('/getComments', async (req, res) => {
 	console.log("comments Requested: " + query)
 	
 	if (req.query.query != "") {
-		let id = new ObjectId(query)
+		let id = new ObjectId(query.toString())
 
-		await posts.find({_id:id}).toArray().then(
-		posts.find({"replyTo": query})
-		.sort({timestamp:-1})
-		.limit(10)
-		.toArray())
-		.then((results, post) => res.send(post.concat(results))).catch((e) => {console.log(e)})
+		await posts.find({_id:id}).toArray().then((post) => {
+			posts.find({"replyTo": query})
+			.sort({timestamp:-1})
+			.toArray()
+			.then((results) => res.send(results)).catch((e) => {console.log(e)})})
+
+	} else {
+		res.send([{content: "Empty search", userID: "error", timestamp: Date.now}]).catch((e) => {console.log(e)});
+	}
+})
+
+app.get('/findById', async (req, res) => {
+	query = decodeURIComponent(req.query.query)
+	console.log("post requested: " + query)
+	
+	if (req.query.query != "") {
+		let id = new ObjectId(query.toString());
+
+		await posts.find({_id:id}).
+		toArray().
+		then((post) => 
+			{res.send(post)
+		})
+		.catch((e) => {console.log(e)})
+
 	} else {
 		res.send([{content: "Empty search", userID: "error", timestamp: Date.now}]).catch((e) => {console.log(e)});
 	}
