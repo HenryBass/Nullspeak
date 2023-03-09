@@ -10,13 +10,13 @@ function Comments() {
   let [mainpost, setMainPost] = useState([{userID: "Loading", content: "Loading", timestamp: Date.now()}]);
 
   useEffect(() => {
-    axios.get("https://null.cyclic.app0/getComments?" + new URLSearchParams({
+    axios.get("https://null.cyclic.app/getComments?" + new URLSearchParams({
       query: window.location.search.slice(1)
     }))
     .then((response) => {
         setPosts(response.data);
     });
-    axios.get("https://null.cyclic.app0/findById?" + new URLSearchParams({
+    axios.get("https://null.cyclic.app/findById?" + new URLSearchParams({
       query: window.location.search.slice(1)
     }))
     .then((response) => {
