@@ -7,7 +7,7 @@ function Reply() {
 
     const form = e.target;
     const formData = new FormData(form);
-    fetch(' http://localhost:3000/post', 
+    fetch(' https://null.cyclic.app:3000/post', 
     { method: "post",
      headers: {'Content-Type': 'application/json'},
     mode: 'cors',

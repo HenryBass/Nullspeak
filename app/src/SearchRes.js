@@ -9,7 +9,7 @@ function SearchRes() {
 
   useEffect(() => {
     console.log(window.location.search.slice(1))
-    axios.get("http://localhost:3000/query?" + new URLSearchParams({
+    axios.get("https://null.cyclic.app:3000/query?" + new URLSearchParams({
       query: window.location.search.slice(1)
     }))
     .then((response) => {

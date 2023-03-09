@@ -8,7 +8,7 @@ function Feed() {
   let [posts, setPosts] = useState([{userID: "Loading", content: "Loading", timestamp: Date.now()}]);
 
   useEffect(() => {
-    axios.get(" http://localhost:3000/posts").then((response) => {
+    axios.get(" https://null.cyclic.app:3000/posts").then((response) => {
       setPosts(response.data);
     });
   }, []);

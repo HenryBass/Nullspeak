@@ -38,7 +38,7 @@ function Post({postContent}) {
     <p  style = {isAdmin}>UserID: <b>{user}</b></p>
     <ReactMarkdown remarkPlugins={[remarkGfm]}>{postContent.content}</ReactMarkdown>
     <p className='unimportant'>{getAgo(postContent.timestamp)}</p>
-    <button className='repliesButton' onClick={handleClick}><Icon glyph="message-simple-fill" size={28}/> {postContent.replyCount}</button>
+    <button className='repliesButton' onClick={handleClick}><Icon glyph="message-simple-fill" size={28}/>{postContent.replyCount}</button>
     </div>
   );
 }
